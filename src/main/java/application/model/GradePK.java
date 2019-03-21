@@ -14,10 +14,14 @@ package application.model;
 		private static final long serialVersionUID = 1L;
 
 	
+		
+
+		
+		
 	    @Column(name = "CODE")
 	    private String code;
 	   
-	 
+	
 	    @Column(name = "COD_GRD")
 	    private String codGrd;
 

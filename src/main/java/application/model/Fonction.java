@@ -43,7 +43,7 @@ public class Fonction implements Serializable {
     @Column(name = "TYP_FONC")
     private String typFonc;
 
-	@MapsId("code")
+	//@MapsId("code")
     @JoinColumn(name = "CODE", referencedColumnName = "CODE", nullable = false, insertable = false, updatable = false)
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private DeptGen deptGen;

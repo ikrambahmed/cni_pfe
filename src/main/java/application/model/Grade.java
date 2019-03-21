@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
@@ -29,45 +30,51 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class Grade implements Serializable {
     private static final long serialVersionUID = 1L;
    
-    @EmbeddedId
+   @EmbeddedId
     private GradePK gradePK;
   
+    
     @Column(name = "LIB_GRDA")
     private String libGrda;
     @Column(name = "LIB_GRDL")
     private String libGrdl;
     
 
-	@MapsId("code")
-	@JsonIgnore
+	//@MapsId("code")
     @JoinColumn(name = "CODE", referencedColumnName = "CODE", nullable = false, insertable = false, updatable = false)
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private DeptGen deptGen;
 
-	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "grade", fetch = FetchType.EAGER)
-	@JsonIgnore
-    private Collection<Missionnaire> missionnaireCollection;
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, mappedBy = "grade")
+	private Collection<Missionnaire> missionnaire;
 
+   
 
 	
     
-@JsonIgnore
- public Collection<Missionnaire> getMissionnaireCollection() {
-		return missionnaireCollection;
+	public GradePK getGradePK() {
+		return gradePK;
 	}
 
 
-
-
-	public void setMissionnaireCollection(Collection<Missionnaire> missionnaireCollection) {
-		this.missionnaireCollection = missionnaireCollection;
+	public void setGradePK(GradePK gradePK) {
+		this.gradePK = gradePK;
 	}
 
+    @JsonIgnore
+	public Collection<Missionnaire> getMissionnaire() {
+	return missionnaire;
+}
 
 
+public void setMissionnaire(Collection<Missionnaire> missionnaire) {
+	this.missionnaire = missionnaire;
+}
 
-Grade() {
+
+	
+
+public Grade() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -77,24 +84,12 @@ Grade() {
 
 public Grade(GradePK gradePK, String libGrda, String libGrdl) {
 	super();
-	this.gradePK = gradePK;
+	//this.gradePK = gradePK;
 	this.libGrda = libGrda;
 	this.libGrdl = libGrdl;
 }
 
 
-
-
-public GradePK getGradePK() {
-	return gradePK;
-}
-
-
-
-
-public void setGradePK(GradePK gradePK) {
-	this.gradePK = gradePK;
-}
 
 
 
@@ -145,9 +140,4 @@ public void setDeptGen(DeptGen deptGen) {
 	this.deptGen = deptGen;
 }
 
-
-
-	
-    
-    
 }

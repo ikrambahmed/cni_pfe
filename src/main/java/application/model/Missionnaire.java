@@ -22,6 +22,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  *
  * @author dell
@@ -58,17 +61,36 @@ public class Missionnaire implements Serializable {
     @ManyToOne
     private Groupe codgrp;
 
-    
 
-    @ManyToOne(cascade = CascadeType.ALL)
+/*	@ManyToOne 
+	private Grade Grade;*/
+	
+   
+    
+    @ManyToOne
     @JoinColumns({
-        @JoinColumn(name = "CODE",referencedColumnName = "CODE" ,  insertable=false, updatable=false)
-        , @JoinColumn(name = "COD_GRD",referencedColumnName="COD_GRD" ,  insertable=false, updatable=false)})
+        @JoinColumn(name = "CODE", referencedColumnName = "CODE", insertable = false, updatable = false),
+        @JoinColumn(name = "COD_GRD", referencedColumnName = "COD_GRD", insertable = false, updatable = false),
+})
+    
     private Grade grade;
+
+
+
     
     
-    
-    public Missionnaire() {
+   
+
+
+	public Grade getGrade() {
+		return grade;
+	}
+
+	public void setGrade(Grade grade) {
+		this.grade = grade;
+	}
+
+	public Missionnaire() {
     }
 
 	public Missionnaire(String cin, String matricule) {
@@ -129,13 +151,7 @@ public class Missionnaire implements Serializable {
 		this.codgrp = codgrp;
 	}
 
-	public Grade getGrade() {
-		return grade;
-	}
 
-	public void setGrade(Grade grade) {
-		this.grade = grade;
-	}
 
 	
 

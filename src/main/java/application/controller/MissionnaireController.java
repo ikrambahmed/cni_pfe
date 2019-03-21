@@ -44,8 +44,8 @@ public class MissionnaireController {
 	@PostMapping("/add")
 	public void addMissionaire(@RequestBody Missionnaire missionaire)
 	{
-		missionaireService.addMissionaire(missionaire);
-	}
+		missionaireService.addMissionaire(missionaire);}
+	
 	
 	@PutMapping
 	public void updateMissionaire(@RequestBody Missionnaire missionaire)
