@@ -47,9 +47,6 @@ public class Grade implements Serializable {
 
     @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, mappedBy = "grade")
 	private Collection<Missionnaire> missionnaire;
-
-   
-
 	
     
 	public GradePK getGradePK() {
